@@ -1,0 +1,81 @@
+@import '../../../sass/variables';
+@import '../../../sass/mixins';
+
+.newsletter {
+  background-color: #0c0c0c;
+  box-shadow: 22px 30px 95px 1px rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(220, 202, 135, 0.2);
+  color: $white;
+  padding: 64px;
+  width: 60%;
+  text-align: center;
+
+  position: absolute;
+  left: 50%;
+  top: -23%;
+  transform: translateX(-50%);
+
+  @include flex-col-center;
+  gap: 8px;
+
+  .news {
+    @include stylish-700;
+  }
+
+  .updates {
+    color: $light-text;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    @include open-sans-400;
+  }
+
+  .subsribe {
+    @include large-font;
+    @include stylish-600;
+    color: $yellow;
+  }
+
+  form {
+    @include flex-row-center;
+    justify-content: center;
+    gap: 32px;
+    width: 100%;
+
+    input {
+      @include stylish-700;
+      border: 1px solid var(--f-5-efdb, #f5efdb);
+      height: 40px;
+      background-color: #0c0c0c;
+      padding-left: 18px;
+      width: 60%;
+
+      &::placeholder {
+        color: $light-text;
+      }
+
+      &:focus {
+        outline: none;
+        caret-color: $white;
+      }
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .newsletter {
+    width: 70%;
+  }
+}
+
+@media (max-width: 700px) {
+  .newsletter {
+    width: 90%;
+
+    form {
+      flex-direction: column;
+      input {
+        width: 100%;
+      }
+    }
+  }
+}

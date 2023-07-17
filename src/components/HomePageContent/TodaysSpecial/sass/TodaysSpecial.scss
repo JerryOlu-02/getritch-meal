@@ -1,0 +1,127 @@
+@import '../../../../sass/variables';
+@import '../../../../sass/mixins';
+
+.todaysspecial {
+  @include padding;
+  @include flex-col-center;
+  gap: 64px;
+  padding-top: 120px;
+  padding-bottom: 120px;
+  background-color: $black;
+  background-image: url(../../../../assets/special-background.svg);
+  background-repeat: no-repeat;
+  background-size: calc(50%);
+  background-position-y: calc(35%);
+  background-position-x: calc(25%);
+}
+
+.todaysspecial-header {
+  @include flex-col-center;
+  text-align: center;
+  gap: 8px;
+  color: $white;
+  @include stylish-700;
+
+  h3 {
+    @include medium-font;
+    @include stylish-600;
+    color: $yellow;
+  }
+}
+
+.todaysspecial-content {
+  @include flex-row-center;
+  justify-content: center;
+  gap: 32px;
+  width: 100%;
+}
+
+.showspecial {
+  @include flex-col-center;
+  gap: 48px;
+
+  h4 {
+    font-size: 32px;
+    color: $white;
+    @include stylish-600;
+  }
+
+  .showspecial-content {
+    @include flex-col;
+    gap: 40px;
+    max-width: 20rem;
+
+    .showspecial-content-bar {
+      @include flex-col;
+      gap: 8px;
+
+      aside {
+        @include flex-row-center;
+        @include stylish-700;
+        justify-content: space-between;
+        gap: 10px;
+        color: $white;
+
+        .menu-price {
+          @include flex-row-center;
+          gap: 32px;
+        }
+
+        .menu-meal {
+          color: $yellow;
+        }
+      }
+
+      .menu-content {
+        @include open-sans-400;
+        color: $light-text;
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+.bottle-div {
+  width: 20rem;
+  height: 35rem;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@media (max-width: 820px) {
+  .bottle-div {
+    display: none;
+  }
+
+  .todaysspecial-content {
+    align-items: flex-start;
+  }
+
+  .showspecial {
+    width: 50%;
+
+    .showspecial-content {
+      max-width: unset;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+@media (max-width: 820px) {
+  .todaysspecial {
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+
+  .todaysspecial-content {
+    flex-direction: column;
+  }
+
+  .showspecial {
+    width: 100%;
+  }
+}

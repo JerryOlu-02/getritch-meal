@@ -1,0 +1,25 @@
+@import '../../../../sass/variables';
+@import '../../../../sass/mixins';
+
+.categoriescontent {
+  @include flex-col;
+  @include stylish-700;
+  justify-content: space-between;
+  border: 1px solid $yellow;
+  padding: 15px;
+  cursor: pointer;
+  gap: 8px;
+  min-height: 20rem;
+  width: 15rem;
+  color: $white;
+
+  img {
+    height: 13rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .categoriescontent {
+    width: 100%;
+  }
+}

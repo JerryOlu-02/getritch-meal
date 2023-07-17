@@ -1,0 +1,24 @@
+@import '../../sass/variables';
+@import '../../sass/mixins';
+
+.pagination {
+  @include padding;
+  @include flex-row-center;
+  justify-content: center;
+  gap: 10px;
+
+  div {
+    cursor: pointer;
+    @include stylish-700;
+    width: 30px;
+    height: 30px;
+    background-color: $yellow;
+    color: $black;
+    @include flex-col-center;
+    @include transition(background-color);
+  }
+
+  div.active {
+    background-color: #ebca52;
+  }
+}

@@ -1,0 +1,148 @@
+@import '../../../sass/variables';
+@import '../../../sass/mixins';
+
+.hero {
+  background-color: $black;
+  @include padding;
+  @include flex-col;
+  align-items: center;
+  gap: 64px;
+  padding-top: 48px;
+  padding-bottom: 150px;
+  position: relative;
+}
+
+.hero-top {
+  @include flex-row-center;
+  justify-content: center;
+  width: 100%;
+  gap: 100px;
+  position: relative;
+}
+
+.hero-top-left {
+  @include flex-row-center;
+  @include open-sans-400;
+  color: $white;
+  gap: 40px;
+
+  position: absolute;
+  z-index: 2;
+  left: -60px;
+  top: 50%;
+  transform: translateY(-50%) rotate(-90deg);
+}
+
+.hero-content {
+  @include flex-row-center;
+  gap: 150px;
+  padding-left: 60px;
+  padding-right: 100px;
+}
+
+.hero-content-left {
+  @include flex-col;
+  gap: 8px;
+  color: $white;
+  @include stylish-700;
+  width: 50%;
+
+  h3 {
+    color: $yellow;
+    font-size: 90px;
+    margin-bottom: 24px;
+  }
+
+  .hero-content-p {
+    color: $light-text;
+    @include open-sans-400;
+  }
+
+  button {
+    margin-top: 24px;
+  }
+}
+
+.hero-bottom {
+  @include flex-row-center;
+  @include stylish-600;
+  gap: 8px;
+  color: #f5efdb;
+}
+
+.scroll {
+  @include flex-col-center;
+  gap: 24px;
+  color: $yellow;
+  @include stylish-700;
+  cursor: pointer;
+
+  position: absolute;
+  right: 120px;
+  bottom: 150px;
+}
+
+@media (max-width: 1283px) {
+  .hero-content {
+    gap: 80px;
+  }
+
+  .hero-content-left {
+    h3 {
+      font-size: 75px;
+    }
+  }
+}
+
+@media (max-width: 1062px) {
+  .hero-content {
+    gap: 80px;
+  }
+
+  .hero-content-left {
+    h3 {
+      font-size: 64px;
+    }
+  }
+}
+
+@media (max-width: 1028px) {
+  .scroll {
+    right: 60px;
+  }
+}
+
+@media (max-width: 940px) {
+  .hero-content {
+    padding-right: 0;
+  }
+}
+
+@media (max-width: 842px) {
+  .hero-content-left {
+    h3 {
+      @include large-font;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-top-left {
+    top: 10rem;
+  }
+
+  .hero-content {
+    flex-direction: column-reverse;
+    padding-left: 0;
+  }
+
+  .hero-content-left {
+    width: 100%;
+  }
+}
+
+@media (max-width: 500px) {
+  .hero {
+    padding-bottom: 50px;
+  }
+}

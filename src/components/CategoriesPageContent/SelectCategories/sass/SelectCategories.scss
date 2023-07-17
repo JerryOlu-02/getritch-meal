@@ -1,0 +1,90 @@
+@import '../../../../sass/variables';
+@import '../../../../sass/mixins';
+
+.selectcategories {
+  @include padding;
+  @include flex-col-center;
+  gap: 60px;
+  padding-top: 60px;
+  padding-bottom: 140px;
+
+  form {
+    @include flex-col-center;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+
+    div {
+      @include flex-row-center;
+      gap: 20px;
+    }
+
+    input {
+      color: $white;
+      caret-color: $white;
+      padding-left: 15px;
+      width: 17rem;
+      min-height: 32px;
+      background-color: $black;
+      border: 1px solid $yellow;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    p {
+      color: $light-text;
+      @include open-sans-400;
+      font-size: 14px;
+    }
+  }
+}
+
+.selectcategories-buttons {
+  @include flex-row-center;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+
+  button {
+    &:hover {
+      transform: scaleX(1.1);
+    }
+  }
+
+  p {
+    font-size: 23px;
+    @include stylish-700;
+    color: $white;
+  }
+}
+
+.selectcategories-meals {
+  @include flex-row-center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+
+  .error-message {
+    font-size: 23px;
+    @include stylish-700;
+    color: $white;
+  }
+}
+
+@media (max-width: 500px) {
+  .selectcategories {
+    padding-top: 50px;
+    form {
+      div {
+        width: 100%;
+        flex-direction: column;
+      }
+
+      input {
+        width: 100%;
+      }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+@import '../../sass/variables';
+@import '../../sass/mixins';
+
+.btn {
+  @include stylish-700;
+  background-color: $yellow;
+  border: none;
+  cursor: pointer;
+  color: #0c0c0c;
+  min-height: 32px;
+  width: max-content;
+  padding-left: 32px;
+  padding-right: 32px;
+  @include transition(transform background-color);
+}
+
+.btn.active {
+  background-color: #ebca52;
+}

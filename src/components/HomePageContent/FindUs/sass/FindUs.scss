@@ -1,0 +1,110 @@
+@import '../../../../sass/variables';
+@import '../../../../sass/mixins';
+
+.findus {
+  @include padding;
+  @include flex-row-center;
+  justify-content: center;
+  padding-top: 110px;
+  padding-bottom: 110px;
+  gap: 120px;
+
+  position: relative;
+  width: 100%;
+  background-color: $black;
+  color: $white;
+  z-index: 1;
+
+  .bg-image {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 75%;
+    height: calc(100% + 25px);
+    z-index: -1;
+  }
+
+  .hero-content-right {
+    width: 35%;
+  }
+}
+
+.findus-left {
+  @include flex-col;
+  gap: 45px;
+}
+
+.findus-left-header {
+  @include flex-col;
+  gap: 8px;
+
+  p {
+    @include stylish-700;
+    font-size: 23px;
+  }
+
+  h3 {
+    @include stylish-600;
+    color: $yellow;
+    @include large-font;
+  }
+}
+
+.findus-left-cotent {
+  @include flex-col;
+  gap: 32px;
+
+  .findus-left-cotent-header {
+    color: $light-text;
+  }
+
+  p {
+    @include open-sans-400;
+    font-size: 14px;
+  }
+
+  div {
+    @include flex-col;
+    gap: 16px;
+
+    h4 {
+      font-size: 23px;
+      @include stylish-700;
+      color: $yellow;
+    }
+  }
+}
+
+@media (max-width: 1000px) {
+  .findus {
+    .hero-content-right {
+      width: 50%;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .findus {
+    flex-direction: column-reverse;
+
+    .hero-content-right {
+      width: 100%;
+    }
+  }
+
+  .findus-left {
+    width: 100%;
+  }
+}
+
+@media (max-width: 500px) {
+  .findus {
+    padding-top: 50px;
+    padding-bottom: 50px;
+
+    .bg-image {
+      width: 85%;
+      height: calc(100% + 15px);
+    }
+  }
+}

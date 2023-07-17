@@ -1,0 +1,85 @@
+@import '../../../../sass/variables';
+@import '../../../../sass/mixins';
+
+.aboutus {
+  @include padding;
+  @include flex-row-center;
+  justify-content: center;
+  gap: 85px;
+  padding-top: 128px;
+  padding-bottom: 128px;
+
+  background-image: url(../../../../assets/footer-background.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: relative;
+  z-index: 1;
+
+  aside {
+    @include flex-col;
+    gap: 30px;
+    // width: 30%;
+
+    h3 {
+      @include large-font;
+      color: $yellow;
+      @include stylish-600;
+    }
+
+    p {
+      @include open-sans-400;
+      line-height: 1.75;
+      color: $light-text;
+    }
+  }
+
+  .aboutus-left {
+    align-items: flex-end;
+    text-align: right;
+  }
+
+  .aboutus-right {
+    align-items: flex-start;
+  }
+
+  div {
+    width: 9rem;
+    height: 30rem;
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+.gee {
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@media (max-width: 830px) {
+  .aboutus {
+    flex-direction: column;
+    gap: 0;
+
+    .aboutus-left {
+      text-align: left;
+      align-items: flex-start;
+    }
+
+    div {
+      width: 100%;
+      height: max-content;
+      transform: rotate(-90deg);
+
+      svg {
+        height: 15rem;
+      }
+    }
+  }
+}

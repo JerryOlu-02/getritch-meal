@@ -1,0 +1,89 @@
+@import '../../../../sass/variables';
+@import '../../../../sass/mixins';
+
+.chefsword {
+  @include padding;
+  @include flex-row-center;
+  padding-top: 125px;
+  padding-bottom: 125px;
+  justify-content: center;
+  gap: 96px;
+
+  background-image: url(../../../../assets/footer-background.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+
+  .hero-content-right {
+    width: 35%;
+  }
+}
+
+.chefsword-right {
+  @include flex-col-center;
+  width: 40%;
+  align-items: flex-start;
+  gap: 40px;
+  color: $light-text;
+}
+
+.chefsword-right-header {
+  @include flex-col;
+  gap: 8px;
+
+  p {
+    font-size: 23px;
+    @include stylish-700;
+    color: $white;
+  }
+
+  h3 {
+    @include medium-font;
+    @include stylish-600;
+    color: $yellow;
+  }
+}
+
+.chefsword-right-content {
+  @include open-sans-400;
+  font-size: 14px;
+
+  p:first-of-type {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+}
+
+.chefsword-right-footer {
+  @include flex-col;
+  align-items: flex-start;
+  gap: 8px;
+
+  p:first-of-type {
+    @include stylish-400;
+    font-size: 32px;
+    color: $yellow;
+  }
+}
+
+@media (max-width: 768px) {
+  .chefsword {
+    flex-direction: column;
+
+    .hero-content-right {
+      width: 100%;
+    }
+
+    .chefsword-right {
+      width: 100%;
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .chefsword {
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+}
