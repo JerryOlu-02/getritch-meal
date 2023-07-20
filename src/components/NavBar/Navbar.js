@@ -3,6 +3,7 @@ import { ReactComponent as Line } from '../../assets/Line.svg';
 import './sass/Navbar.scss';
 import Logo from './Logo';
 import { useState, forwardRef } from 'react';
+import { useSelector } from 'react-redux';
 
 const Navbar = forwardRef(function (props, ref) {
   const [active, setActive] = useState(false);
@@ -14,6 +15,8 @@ const Navbar = forwardRef(function (props, ref) {
   };
 
   const isActive = active && 'active';
+
+  const user = useSelector(({ user: { currentUser } }) => currentUser);
 
   return (
     <nav ref={ref} className="navbar">
@@ -71,12 +74,21 @@ const Navbar = forwardRef(function (props, ref) {
 
           <div className="last-nav">
             <li>
-              <NavLink
-                to="login"
-                className={({ isActive }) => (isActive ? 'active' : '')}
-              >
-                Login/Registration
-              </NavLink>
+              {user ? (
+                <NavLink
+                  to="profile"
+                  className={({ isActive }) => (isActive ? 'active' : '')}
+                >
+                  User Profile
+                </NavLink>
+              ) : (
+                <NavLink
+                  to="login"
+                  className={({ isActive }) => (isActive ? 'active' : '')}
+                >
+                  Login/Registration
+                </NavLink>
+              )}
             </li>
 
             <Line />

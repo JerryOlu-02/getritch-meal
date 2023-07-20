@@ -36,6 +36,15 @@ export const categoryApi = createApi({
           };
         },
       }),
+
+      getMealDetail: builder.query({
+        query: (mealId) => {
+          return {
+            url: `lookup.php?i=${mealId}`,
+            method: 'GET',
+          };
+        },
+      }),
     };
   },
 });
@@ -44,4 +53,5 @@ export const {
   useFetchCategoriesQuery,
   useFetchOneCategoryMutation,
   useSearchMealMutation,
+  useGetMealDetailQuery,
 } = categoryApi;

@@ -2,8 +2,10 @@ import Loader from '../../Loader/Loader';
 import './sass/CategoriesContent.scss';
 import { useSelector } from 'react-redux';
 import { createSelector } from '@reduxjs/toolkit';
+import { useNavigate } from 'react-router-dom';
 
 const CategoriesContent = function ({ contentPerPage }) {
+  const navigate = useNavigate();
   // GET searched meals array
 
   // Returns App State
@@ -46,11 +48,14 @@ const CategoriesContent = function ({ contentPerPage }) {
   const { loading, error, meals, currentPage } = getData(appState);
 
   // PAGINATION Syntax
-
   const indexOfLastCountry = currentPage * contentPerPage;
   const indexOfFirstCountry = indexOfLastCountry - contentPerPage;
 
   let categoryContent;
+
+  const goToDetailsPage = function (meal) {
+    navigate(`/meal-details/${meal.idMeal}`);
+  };
 
   if (error) {
     categoryContent = <p className="error-message">Could Not fetch Meals</p>;
@@ -61,7 +66,11 @@ const CategoriesContent = function ({ contentPerPage }) {
       meals &&
       meals.length &&
       meals.slice(indexOfFirstCountry, indexOfLastCountry).map((meal) => (
-        <div key={meal.idMeal} className="categoriescontent">
+        <div
+          onClick={() => goToDetailsPage(meal)}
+          key={meal.idMeal}
+          className="categoriescontent"
+        >
           <img src={meal.strMealThumb} alt="meal__image" />
 
           <p>{meal.strMeal}</p>

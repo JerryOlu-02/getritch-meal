@@ -3,7 +3,11 @@ import Root from './pages/Root';
 import HomePage from './pages/HomePage';
 import CategoriesPage from './pages/CategoriesPage';
 import ErrorPage from './pages/ErrorPage';
-// import { loader as categoriesLoader } from './components/CategoriesPageContent/SelectCategories/SelectCategories';
+import MealDetailsPage from './pages/MealDetailsPage';
+import RegistrationPage from './pages/RegistrationPage';
+import LoginPage from './pages/LoginPage';
+import Profile from './pages/ProfilePage';
+import ProtectedRoute from './components/ProtectedRoute';
 
 const router = createBrowserRouter([
   {
@@ -17,9 +21,38 @@ const router = createBrowserRouter([
       },
 
       {
+        path: 'profile',
+        element: (
+          <ProtectedRoute>
+            <Profile />
+          </ProtectedRoute>
+        ),
+      },
+
+      {
         path: 'categories',
         element: <CategoriesPage />,
-        // loader: categoriesLoader,
+      },
+
+      {
+        path: 'meal-details',
+        // element: <MealDetailsPage />,
+        children: [
+          {
+            path: ':mealId',
+            element: <MealDetailsPage />,
+          },
+        ],
+      },
+
+      {
+        path: 'sign-up',
+        element: <RegistrationPage />,
+      },
+
+      {
+        path: 'login',
+        element: <LoginPage />,
       },
     ],
   },

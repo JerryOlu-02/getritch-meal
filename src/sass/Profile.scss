@@ -1,0 +1,48 @@
+@import './variables';
+@import './mixins';
+
+.profile {
+  @include padding;
+  padding-top: 60px;
+  padding-bottom: 120px;
+  @include flex-col-center;
+  gap: 30px;
+
+  div {
+    width: 500px;
+    padding: 30px;
+    gap: 30px;
+    @include flex-col-center;
+    color: $white;
+    @include stylish-700;
+    box-shadow: $light-text 0px 1px 3px 0px, $light-text 0px 0px 0px 1px;
+
+    .btn {
+      width: 100%;
+    }
+
+    h2 {
+      font-size: 32px;
+    }
+  }
+
+  p {
+    cursor: pointer;
+    color: $light-text;
+    text-decoration: underline;
+  }
+}
+
+@media (max-width: 600px) {
+  .profile {
+    padding-top: 20px;
+
+    div {
+      width: 100%;
+
+      h2 {
+        font-size: 23px;
+      }
+    }
+  }
+}

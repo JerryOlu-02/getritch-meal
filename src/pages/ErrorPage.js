@@ -9,7 +9,7 @@ const ErrorPage = function () {
 
   if (error.status >= 400) {
     status = error.status;
-    message = error.data.message;
+    message = error.data;
   }
 
   if (error.status === 404) {
