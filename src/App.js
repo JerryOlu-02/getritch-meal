@@ -8,6 +8,8 @@ import RegistrationPage from './pages/RegistrationPage';
 import LoginPage from './pages/LoginPage';
 import Profile from './pages/ProfilePage';
 import ProtectedRoute from './components/ProtectedRoute';
+import ResetPassword from './components/RegistrationPageContent/ResetPassword';
+import UpdateProfile from './components/RegistrationPageContent/UpdateProfile';
 
 const router = createBrowserRouter([
   {
@@ -22,11 +24,12 @@ const router = createBrowserRouter([
 
       {
         path: 'profile',
-        element: (
-          <ProtectedRoute>
-            <Profile />
-          </ProtectedRoute>
-        ),
+        element: <ProtectedRoute component={Profile} />,
+      },
+
+      {
+        path: 'profile/update',
+        element: <ProtectedRoute component={UpdateProfile} />,
       },
 
       {
@@ -53,6 +56,11 @@ const router = createBrowserRouter([
       {
         path: 'login',
         element: <LoginPage />,
+      },
+
+      {
+        path: 'password-reset',
+        element: <ResetPassword />,
       },
     ],
   },

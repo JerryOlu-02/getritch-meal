@@ -6,7 +6,9 @@ import { createRef, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setFooterRef } from '../store';
 import { setCurrentUser } from '../store';
-import { auth } from '../firebase';
+// import { auth } from '../firebase';
+import { supabase } from '../supabaseClient';
+// import { useSupabaseClient } from '@supabase/auth-helpers-react';
 
 const Root = function () {
   const [loading, setLoading] = useState(true);
@@ -25,17 +27,27 @@ const Root = function () {
   }, [dispatch, footerRef]);
 
   // Auth
-  useEffect(() => {
-    const unsubsribe = auth.onAuthStateChanged((user) => {
-      dispatch(setCurrentUser(user));
+  // useEffect(() => {
+  //   const unsubsribe = auth.onAuthStateChanged((user) => {
+  //     dispatch(setCurrentUser(user));
 
-      // After User is gotten set loading to false
+  //     // After User is gotten set loading to false
+  //     setLoading(false);
+  //   });
+
+  //   return () => {
+  //     unsubsribe();
+  //   };
+  // }, [dispatch]);
+
+  useEffect(() => {
+    supabase.auth.onAuthStateChange((event, session) => {
+      console.log(event, session);
+
+      dispatch(setCurrentUser(session?.user));
+
       setLoading(false);
     });
-
-    return () => {
-      unsubsribe();
-    };
   }, [dispatch]);
 
   return (

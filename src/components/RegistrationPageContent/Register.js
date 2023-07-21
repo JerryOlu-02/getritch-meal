@@ -3,14 +3,17 @@ import Button from '../Button/Button';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { signUp } from '../../utils/auth';
+// import { signUp } from '../../utils/auth';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { useSupabaseClient } from '@supabase/auth-helpers-react';
 
 const Register = function () {
-  const navigate = useNavigate();
+  const supabase = useSupabaseClient();
+  // const navigate = useNavigate();
 
+  const [message, setMessage] = useState('');
   const [customError, setCustomError] = useState(null);
   const [isLoading, setLoading] = useState(false);
 
@@ -37,11 +40,21 @@ const Register = function () {
     }
 
     try {
+      setCustomError(null);
       setLoading(true);
 
-      await signUp(data.email, data.password);
+      // await signUp(data.email, data.password);
+      const { error } = await supabase.auth.signUp({
+        email: data.email,
+        password: data.password,
+      });
 
-      navigate('/', { replace: true });
+      if (error) throw new Error(error.message);
+
+      setMessage(
+        'Account Created Succesfully. An email has been sent to you, kindly verify your mail and login access your account'
+      );
+      // navigate('/', { replace: true });
     } catch (error) {
       setCustomError(error.message);
     }
@@ -55,6 +68,7 @@ const Register = function () {
 
       <form onSubmit={handleSubmit(submitForm)} className="registration-form">
         {customError && <div className="alert failed">{customError}</div>}
+        {message && <div className="alert success">{message}</div>}
 
         <aside>
           <label>Email Address:</label>
@@ -64,14 +78,14 @@ const Register = function () {
 
         <aside>
           <label>Password</label>
-          <input type="text" {...register('password')} />
+          <input type="password" {...register('password')} />
           {errors.password && <span>{errors.password?.message}</span>}
           {errors.passwordError && <span>{errors.passwordError?.message}</span>}
         </aside>
 
         <aside>
           <label>Confirm Password</label>
-          <input type="text" {...register('confirmPassword')} />
+          <input type="password" {...register('confirmPassword')} />
           {errors.confirmPassword && (
             <span>{errors.confirmPassword?.message}</span>
           )}

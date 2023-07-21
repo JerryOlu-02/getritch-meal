@@ -3,9 +3,11 @@ import Button from '../components/Button/Button';
 import '../sass/Profile.scss';
 import { logOut } from '../utils/auth';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+import { useSupabaseClient } from '@supabase/auth-helpers-react';
 
 const Profile = function () {
+  const supabase = useSupabaseClient();
   const navigate = useNavigate();
   const [error, setError] = useState(null);
 
@@ -13,7 +15,10 @@ const Profile = function () {
 
   const handleLogout = async function () {
     try {
-      await logOut();
+      // await logOut();
+      const { error } = await supabase.auth.signOut();
+
+      if (error) throw new Error(error.message);
 
       navigate('/login', { replace: true });
     } catch (error) {
@@ -29,7 +34,9 @@ const Profile = function () {
 
         <h2>Hi There, {user.email}</h2>
 
-        <Button>Update Profile</Button>
+        <Link to="update">
+          <Button>Update Profile</Button>
+        </Link>
       </div>
 
       <p onClick={handleLogout}>Log Out</p>

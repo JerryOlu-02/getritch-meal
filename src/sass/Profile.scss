@@ -6,6 +6,7 @@
   padding-top: 60px;
   padding-bottom: 120px;
   @include flex-col-center;
+  text-align: center;
   gap: 30px;
 
   div {

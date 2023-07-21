@@ -3,57 +3,51 @@ import Button from '../Button/Button';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-// import { signIn } from '../../utils/auth';
+import { resetPassword } from '../../utils/auth';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
-import { useSupabaseClient } from '@supabase/auth-helpers-react';
 
-const Login = function () {
-  const supabase = useSupabaseClient();
-
-  const navigate = useNavigate();
+const ResetPassword = function () {
+  const [message, setMessage] = useState('');
   const [error, setError] = useState(null);
   const [isLoading, setLoading] = useState(false);
 
   const validationSchema = yup.object().shape({
     email: yup.string().email().required(),
-    password: yup.string().required(),
   });
 
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({ resolver: yupResolver(validationSchema) });
 
   const submitForm = async function (data) {
     try {
-      setError(null);
+      setError('');
+      setMessage('');
+
       setLoading(true);
 
-      // await signIn(data.email, data.password);
-      const { error } = await supabase.auth.signInWithPassword({
-        email: data.email,
-        password: data.password,
-      });
+      await resetPassword(data.email, data.email);
 
-      if (error) throw new Error(error.message);
-
-      navigate('/', { replace: true });
+      setMessage('A link has been sent to your email to reset password');
     } catch (error) {
       setError(error.message);
     }
 
+    reset();
     setLoading(false);
   };
 
   return (
     <section className="registration">
-      <h2>SIGN INTO YOUR ACCOUNT</h2>
+      <h2>RESET YOUR PASSWORD</h2>
 
       <form onSubmit={handleSubmit(submitForm)} className="registration-form">
         {error && <div className="alert failed">{error}</div>}
+        {message && <div className="alert success">{message}</div>}
 
         <aside>
           <label>Email Address:</label>
@@ -61,23 +55,16 @@ const Login = function () {
           {errors.email && <span>{errors.email?.message}</span>}
         </aside>
 
-        <aside>
-          <label>Password</label>
-          <input type="password" {...register('password')} />
-          {errors.password && <span>{errors.password?.message}</span>}
-          {errors.passwordError && <span>{errors.passwordError?.message}</span>}
-        </aside>
-
         <Button loading={isLoading} disabled={isLoading} type="submit">
-          Sign In
+          Reset Password
         </Button>
       </form>
 
-      <Link to="/password-reset">Forgot your password?</Link>
+      <Link to="/login">Login </Link>
 
       <Link to="/sign-up">Don't have an account? Sign Up</Link>
     </section>
   );
 };
 
-export default Login;
+export default ResetPassword;

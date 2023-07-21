@@ -15,8 +15,7 @@
     margin-bottom: 30px;
   }
 
-  a,
-  p {
+  a {
     margin-top: 10px;
     color: $light-text;
     text-decoration: underline;
@@ -57,6 +56,11 @@
     caret-color: $white;
     color: $white;
 
+    &::placeholder {
+      color: $light-text;
+      @include open-sans-400;
+    }
+
     &:focus {
       outline: none;
     }
@@ -64,6 +68,15 @@
 
   .btn {
     width: 100%;
+  }
+
+  p {
+    cursor: pointer;
+    @include open-sans-400;
+    color: $light-text;
+    text-decoration: underline;
+    font-size: 14px;
+    text-align: center;
   }
 }
 
@@ -76,10 +89,19 @@
   @include flex-col-center;
   @include open-sans-400;
   color: $black;
+  text-align: center;
 }
 
 .alert.failed {
   background-color: #dcca87;
+}
+
+.alert.success {
+  padding: 15px;
+  background-color: $light-text;
+  border: none;
+  color: $black;
+  font-size: 14px;
 }
 
 @media (max-width: 600px) {
