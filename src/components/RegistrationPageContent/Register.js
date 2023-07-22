@@ -11,9 +11,9 @@ import { useSupabaseClient } from '@supabase/auth-helpers-react';
 
 const Register = function () {
   const supabase = useSupabaseClient();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  const [message, setMessage] = useState('');
+  // const [message, setMessage] = useState('');
   const [customError, setCustomError] = useState(null);
   const [isLoading, setLoading] = useState(false);
 
@@ -51,10 +51,10 @@ const Register = function () {
 
       if (error) throw new Error(error.message);
 
-      setMessage(
-        'Account Created Succesfully. An email has been sent to you, kindly verify your mail and login access your account'
-      );
-      // navigate('/', { replace: true });
+      // setMessage(
+      //   'Account Created Succesfully. An email has been sent to you, kindly verify your mail and login access your account'
+      // );
+      navigate('/', { replace: true });
     } catch (error) {
       setCustomError(error.message);
     }
@@ -68,7 +68,7 @@ const Register = function () {
 
       <form onSubmit={handleSubmit(submitForm)} className="registration-form">
         {customError && <div className="alert failed">{customError}</div>}
-        {message && <div className="alert success">{message}</div>}
+        {/* {message && <div className="alert success">{message}</div>} */}
 
         <aside>
           <label>Email Address:</label>

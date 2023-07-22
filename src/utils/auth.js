@@ -7,7 +7,6 @@ import {
   updateEmail,
   updatePassword,
 } from 'firebase/auth';
-import { supabase } from '../supabaseClient';
 
 export const signUp = async function (email, password) {
   const auth = getAuth();

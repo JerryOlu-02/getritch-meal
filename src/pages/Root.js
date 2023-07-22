@@ -41,13 +41,17 @@ const Root = function () {
   // }, [dispatch]);
 
   useEffect(() => {
-    supabase.auth.onAuthStateChange((event, session) => {
+    const { data } = supabase.auth.onAuthStateChange((event, session) => {
       console.log(event, session);
 
       dispatch(setCurrentUser(session?.user));
 
       setLoading(false);
     });
+
+    return () => {
+      data.subscription.unsubscribe();
+    };
   }, [dispatch]);
 
   return (

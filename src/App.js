@@ -10,6 +10,7 @@ import Profile from './pages/ProfilePage';
 import ProtectedRoute from './components/ProtectedRoute';
 import ResetPassword from './components/RegistrationPageContent/ResetPassword';
 import UpdateProfile from './components/RegistrationPageContent/UpdateProfile';
+import ResetPasswordChild from './pages/ResetPasswordChild';
 
 const router = createBrowserRouter([
   {
@@ -61,6 +62,11 @@ const router = createBrowserRouter([
       {
         path: 'password-reset',
         element: <ResetPassword />,
+      },
+
+      {
+        path: 'password-reset/:access-token',
+        element: <ResetPasswordChild />,
       },
     ],
   },

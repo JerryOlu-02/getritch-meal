@@ -14,6 +14,7 @@ const UpdateProfile = function () {
   const navigate = useNavigate();
   const currentUser = useSelector(({ user: { currentUser } }) => currentUser);
 
+  // PASSWORD INPUT STATE
   const [showPassword, setShowPassword] = useState(false);
   const [success, setSuccess] = useState('');
   const [customError, setCustomError] = useState(null);
@@ -66,7 +67,7 @@ const UpdateProfile = function () {
 
       if (data.password) {
         const { error } = await supabase.auth.updateUser({
-          email: data.password,
+          password: data.password,
         });
 
         if (error) throw new Error(error.message);
@@ -113,9 +114,6 @@ const UpdateProfile = function () {
                 {...register('password')}
               />
               {errors.password && <span>{errors.password?.message}</span>}
-              {errors.passwordError && (
-                <span>{errors.passwordError?.message}</span>
-              )}
             </aside>
 
             <aside>

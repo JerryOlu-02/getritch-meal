@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import Button from '../components/Button/Button';
 import '../sass/Profile.scss';
-import { logOut } from '../utils/auth';
+// import { logOut } from '../utils/auth';
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
