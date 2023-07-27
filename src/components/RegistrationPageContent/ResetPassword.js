@@ -35,9 +35,7 @@ const ResetPassword = function () {
       dispatch({ type: 'set_is_loading', payload: true });
 
       // await resetPassword(data.email);
-      const { error } = await supabase.auth.resetPasswordForEmail(data.email, {
-        redirectTo: 'http://localhost:3000/password-reset/',
-      });
+      const { error } = await supabase.auth.resetPasswordForEmail(data.email);
 
       if (error) throw new Error(error.message);
 

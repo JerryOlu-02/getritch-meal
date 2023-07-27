@@ -1,0 +1,20 @@
+@import './variables.scss';
+@import './mixins.scss';
+
+.saved-meals {
+  @include padding;
+  padding-top: 30px;
+  padding-bottom: 100px;
+  @include flex-row-center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.error-message {
+  width: 100%;
+  text-align: center;
+  font-size: 24px;
+  color: $white;
+  @include stylish-700;
+}

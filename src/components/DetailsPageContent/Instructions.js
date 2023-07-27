@@ -7,7 +7,7 @@ const Instructions = function ({ meal }) {
       }
 
       return (
-        <p key={instruction}>
+        <p key={index}>
           <span>{index + 1 < 10 ? `0${index + 1}` : index + 1}.</span>
           {instruction}.
         </p>

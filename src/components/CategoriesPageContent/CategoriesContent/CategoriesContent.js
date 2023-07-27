@@ -2,12 +2,9 @@ import Loader from '../../Loader/Loader';
 import './sass/CategoriesContent.scss';
 import { useSelector } from 'react-redux';
 import { createSelector } from '@reduxjs/toolkit';
-import { useNavigate } from 'react-router-dom';
+import MealCard from './MealCard';
 
 const CategoriesContent = function ({ contentPerPage }) {
-  const navigate = useNavigate();
-  // GET searched meals array
-
   // Returns App State
   const appState = useSelector(({ app }) => app);
 
@@ -53,10 +50,6 @@ const CategoriesContent = function ({ contentPerPage }) {
 
   let categoryContent;
 
-  const goToDetailsPage = function (meal) {
-    navigate(`/meal-details/${meal.idMeal}`);
-  };
-
   if (error) {
     categoryContent = <p className="error-message">Could Not fetch Meals</p>;
   } else if (loading) {
@@ -65,17 +58,9 @@ const CategoriesContent = function ({ contentPerPage }) {
     categoryContent =
       meals &&
       meals.length &&
-      meals.slice(indexOfFirstCountry, indexOfLastCountry).map((meal) => (
-        <div
-          onClick={() => goToDetailsPage(meal)}
-          key={meal.idMeal}
-          className="categoriescontent"
-        >
-          <img src={meal.strMealThumb} alt="meal__image" />
-
-          <p>{meal.strMeal}</p>
-        </div>
-      ));
+      meals
+        .slice(indexOfFirstCountry, indexOfLastCountry)
+        .map((meal) => <MealCard key={meal.idMeal} meal={meal} />);
   }
 
   return <>{categoryContent}</>;

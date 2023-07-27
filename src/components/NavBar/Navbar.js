@@ -64,10 +64,10 @@ const Navbar = forwardRef(function (props, ref) {
 
             <li>
               <NavLink
-                to="landing"
+                to="saved-meals"
                 className={({ isActive }) => (isActive ? 'active' : '')}
               >
-                Landing
+                Saved-Meals
               </NavLink>
             </li>
           </div>

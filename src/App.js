@@ -11,6 +11,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import ResetPassword from './components/RegistrationPageContent/ResetPassword';
 import UpdateProfile from './components/RegistrationPageContent/UpdateProfile';
 import ResetPasswordChild from './pages/ResetPasswordChild';
+import SavedMeals from './pages/SavedMeals';
 
 const router = createBrowserRouter([
   {
@@ -47,6 +48,11 @@ const router = createBrowserRouter([
             element: <MealDetailsPage />,
           },
         ],
+      },
+
+      {
+        path: 'saved-meals',
+        element: <ProtectedRoute component={SavedMeals} />,
       },
 
       {

@@ -51,6 +51,17 @@
       @include stylish-700;
     }
 
+    .meal-header-button {
+      @include flex-col;
+      gap: 10px;
+
+      p {
+        color: $yellow;
+        font-size: 14px;
+        @include open-sans-400;
+      }
+    }
+
     .meal-header-content {
       @include flex-col;
       gap: 30px;

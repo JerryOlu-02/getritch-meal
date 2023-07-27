@@ -3,11 +3,13 @@ import { appReducer } from './slices/appSlice';
 import { setupListeners } from '@reduxjs/toolkit/dist/query/react';
 import { categoryApi } from './apis/categoryApi';
 import { userReducer } from './slices/userSlice';
+import { savesReducer } from './slices/savesSlice';
 
 export const store = configureStore({
   reducer: {
     app: appReducer,
     user: userReducer,
+    saves: savesReducer,
     [categoryApi.reducerPath]: categoryApi.reducer,
   },
 
@@ -21,6 +23,8 @@ setupListeners(store.dispatch);
 
 export * from './slices/appSlice';
 export * from './slices/userSlice';
+
+export * from './slices/savesSlice';
 
 export {
   useFetchCategoriesQuery,
