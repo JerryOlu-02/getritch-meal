@@ -42,7 +42,7 @@ const Root = function () {
 
   useEffect(() => {
     const { data } = supabase.auth.onAuthStateChange((event, session) => {
-      console.log(event, session);
+      // console.log(event, session);
 
       dispatch(setCurrentUser(session?.user));
 

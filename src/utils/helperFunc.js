@@ -1,3 +1,5 @@
+import { supabase } from '../supabaseClient';
+
 export function reducer(state, action) {
   switch (action.type) {
     case 'set_message':
@@ -27,4 +29,15 @@ export function reducer(state, action) {
     default:
       return state;
   }
+}
+
+export async function getBookmarkId(userId) {
+  const { data, error } = await supabase
+    .from('meals')
+    .select('saved-meal,id')
+    .eq('client_id', userId);
+
+  if (error) throw new Error(error);
+
+  return data;
 }

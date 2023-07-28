@@ -7,7 +7,7 @@ const Ingridients = function ({ meal }) {
   }
 
   const ingridients = ingridientsArr.map((ingridient) => {
-    if (meal[`strIngredient${ingridient}`] === '') {
+    if (!meal[`strIngredient${ingridient}`]) {
       return null;
     }
 

@@ -1,40 +1,69 @@
-import { useDispatch } from 'react-redux';
 import Button from '../Button/Button';
-import { addSaves } from '../../store/slices/savesSlice';
 import { useState } from 'react';
 import { useSession } from '@supabase/auth-helpers-react';
 import { supabase } from '../../supabaseClient';
+import { getBookmarkId } from '../../utils/helperFunc';
 
-const MealHeader = function ({ meal, isBookmarked }) {
-  const dispatch = useDispatch();
-
-  const {
-    user: { id: clientId },
-  } = useSession();
+const MealHeader = function ({ meal, isBookmarked, onRemove, onAdd }) {
+  const session = useSession();
 
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  console.log(isBookmarked);
+  // prettier-ignore
+  const mealData = {
+    'idMeal': meal.idMeal,
+    'strMeal': meal.strMeal,
+    'strMealThumb': meal.strMealThumb,
+  };
 
-  const handleClick = async function () {
+  // ADD BOOKMARK
+  const handleAddBookmark = async function () {
+    if (!session?.user) return alert(`You're not signed in`);
+
     setLoading(true);
 
     try {
-      const mealData = {
-        idMeal: meal.idMeal,
-        strMeal: meal.strMeal,
-        strMealThumb: meal.strMealThumb,
-      };
-
-      const { data, error } = await supabase
+      const { error } = await supabase
         .from('meals')
-        .insert([{ 'saved-meal': { ...mealData }, 'client-id': clientId }])
+        .insert([{ 'saved-meal': { ...mealData }, client_id: session.user.id }])
         .select();
 
       if (error) throw new Error(error.message);
 
-      dispatch(addSaves(data));
+      onAdd();
+    } catch (error) {
+      setError(error.message);
+    }
+
+    setLoading(false);
+  };
+
+  // REMOVE BOOKMARK
+  const handleRemoveBookmark = async function () {
+    // FIND BookMarked ID
+    setLoading(true);
+
+    try {
+      const bookmarkedData = await getBookmarkId(session.user.id);
+
+      if (!bookmarkedData) return;
+
+      const bookmarkedEl = bookmarkedData.find(
+        (arr) => arr['saved-meal'].idMeal === meal.idMeal
+      );
+
+      if (!bookmarkedEl) return;
+
+      const { error } = await supabase
+        .from('meals')
+        .delete()
+        .eq('id', bookmarkedEl.id);
+
+      if (error) throw new Error(error);
+
+      // Set idBookMarked to false
+      onRemove();
     } catch (error) {
       setError(error.message);
     }
@@ -65,15 +94,22 @@ const MealHeader = function ({ meal, isBookmarked }) {
 
         <div className="meal-header-button">
           {error && <p>{error}</p>}
-          {!isBookmarked && (
-            <Button disabled={loading} loading={loading} onClick={handleClick}>
-              Save Meal
-            </Button>
-          )}
 
-          {isBookmarked && (
-            <Button disabled={loading} loading={loading} onClick={handleClick}>
+          {isBookmarked ? (
+            <Button
+              disabled={loading}
+              loading={loading}
+              onClick={handleRemoveBookmark}
+            >
               Remove Meal
+            </Button>
+          ) : (
+            <Button
+              disabled={loading}
+              loading={loading}
+              onClick={handleAddBookmark}
+            >
+              Save Meal
             </Button>
           )}
         </div>

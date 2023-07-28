@@ -12,9 +12,7 @@ import { useSession } from '@supabase/auth-helpers-react';
 const MealDetails = function () {
   const { mealId } = useParams();
 
-  const {
-    user: { id },
-  } = useSession();
+  const session = useSession();
 
   const [isBookmarked, setIsBookMarked] = useState(false);
 
@@ -26,10 +24,12 @@ const MealDetails = function () {
   // CHECK IF MEAL IS BOOKMARKED
   useEffect(() => {
     async function fetchId() {
+      if (!session?.user) return;
+
       const { data, error } = await supabase
         .from('meals')
         .select('saved-meal')
-        .eq('client-id', id);
+        .eq('client_id', session.user.id);
 
       if (error) return;
 
@@ -38,7 +38,13 @@ const MealDetails = function () {
     }
 
     fetchId();
-  }, [id, mealId]);
+  }, [session, mealId]);
+
+  // SET BOOKMARKED STATE TO true
+  const removeBookmark = () => setIsBookMarked(false);
+
+  // SET BOOKMARK STATE to false
+  const addBookmark = () => setIsBookMarked(true);
 
   if (isError) {
     return <p className="error-text">Could not Fetch Meal Details</p>;
@@ -50,7 +56,12 @@ const MealDetails = function () {
     <section className="meal-details">
       <h2 className="details-text">MEAL DETAILS</h2>
 
-      <MealHeader isBookmarked={isBookmarked} meal={data.meals[0]} />
+      <MealHeader
+        onRemove={removeBookmark}
+        onAdd={addBookmark}
+        isBookmarked={isBookmarked}
+        meal={data.meals[0]}
+      />
 
       <Ingridients meal={data.meals[0]} />
 

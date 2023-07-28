@@ -5,7 +5,7 @@ const fetchSaves = createAsyncThunk('save/fetch', async (userId) => {
   const { data, error } = await supabase
     .from('meals')
     .select('saved-meal')
-    .eq('client-id', userId);
+    .eq('client_id', userId);
 
   if (error) throw new Error(error.message);
 
@@ -20,11 +20,7 @@ const savesSlice = createSlice({
     isError: false,
   },
 
-  reducers: {
-    addSaves(state, action) {
-      state.savedMeals = [...action.payload];
-    },
-  },
+  reducers: {},
 
   extraReducers: (builder) => {
     builder.addCase(fetchSaves.fulfilled, (state, action) => {
@@ -44,5 +40,4 @@ const savesSlice = createSlice({
 });
 
 export const savesReducer = savesSlice.reducer;
-export const { addSaves } = savesSlice.actions;
 export { fetchSaves };
