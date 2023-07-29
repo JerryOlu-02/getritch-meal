@@ -47,9 +47,17 @@ const MealDetails = function () {
   const addBookmark = () => setIsBookMarked(true);
 
   if (isError) {
-    return <p className="error-text">Could not Fetch Meal Details</p>;
+    return (
+      <section className="meal-details">
+        <p className="error-text">Could not Fetch Meal Details</p>
+      </section>
+    );
   } else if (isLoading) {
-    return <Loader big />;
+    return (
+      <section className="meal-details">
+        <Loader big />
+      </section>
+    );
   }
 
   return (

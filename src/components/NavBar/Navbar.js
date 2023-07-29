@@ -27,6 +27,7 @@ const Navbar = forwardRef(function (props, ref) {
           <div className="first-nav">
             <li>
               <NavLink
+                onClick={handleClick}
                 to="/"
                 className={({ isActive }) => (isActive ? 'active' : '')}
                 end
@@ -37,6 +38,7 @@ const Navbar = forwardRef(function (props, ref) {
 
             <li>
               <NavLink
+                onClick={handleClick}
                 to="categories"
                 className={({ isActive }) => (isActive ? 'active' : '')}
               >
@@ -46,6 +48,7 @@ const Navbar = forwardRef(function (props, ref) {
 
             <li>
               <NavLink
+                onClick={handleClick}
                 to="contact"
                 className={({ isActive }) => (isActive ? 'active' : '')}
               >
@@ -55,6 +58,7 @@ const Navbar = forwardRef(function (props, ref) {
 
             <li>
               <NavLink
+                onClick={handleClick}
                 to="blog"
                 className={({ isActive }) => (isActive ? 'active' : '')}
               >
@@ -64,6 +68,7 @@ const Navbar = forwardRef(function (props, ref) {
 
             <li>
               <NavLink
+                onClick={handleClick}
                 to="saved-meals"
                 className={({ isActive }) => (isActive ? 'active' : '')}
               >
@@ -76,6 +81,7 @@ const Navbar = forwardRef(function (props, ref) {
             <li>
               {user ? (
                 <NavLink
+                  onClick={handleClick}
                   to="profile"
                   className={({ isActive }) => (isActive ? 'active' : '')}
                 >
@@ -83,6 +89,7 @@ const Navbar = forwardRef(function (props, ref) {
                 </NavLink>
               ) : (
                 <NavLink
+                  onClick={handleClick}
                   to="login"
                   className={({ isActive }) => (isActive ? 'active' : '')}
                 >
@@ -95,6 +102,7 @@ const Navbar = forwardRef(function (props, ref) {
 
             <li>
               <NavLink
+                onClick={handleClick}
                 to="book"
                 className={({ isActive }) => (isActive ? 'active' : '')}
               >
