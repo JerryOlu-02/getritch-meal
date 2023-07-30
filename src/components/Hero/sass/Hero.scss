@@ -146,3 +146,16 @@
     padding-bottom: 50px;
   }
 }
+
+@media (max-width: 500px) {
+  .hero {
+    .scroll {
+      right: 5%;
+      bottom: 20px;
+    }
+  }
+
+  .hero-top-left {
+    display: none;
+  }
+}
